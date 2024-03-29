@@ -9,4 +9,13 @@ enum GameOption: string
     case SCISSORS = 'scissors';
     case LIZARD = 'lizard';
     case SPOCK = 'spock';
+
+    public static function values(): array
+    {
+        $values = [];
+        foreach(GameOption::cases() as $case) {
+            $values[] = $case->value;
+        }
+        return $values;
+    }
 }
