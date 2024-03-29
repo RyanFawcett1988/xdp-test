@@ -11,14 +11,14 @@ class Game extends Command
      *
      * @var string
      */
-    protected $signature = 'app:game';
+    protected $signature = 'game:play';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Play a game of Rock, Paper, Scissors, Lizard, Spock';
 
     /**
      * Execute the console command.
