@@ -5,8 +5,12 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Enum;
+use Illuminate\Support\Arr;
 
 use App\Enums\GameOption;
+use App\Enums\GameResult;
+use App\DTO\OutcomeDTO;
+use App\Actions\DecideOutcome;
 
 class Game extends Command
 {
@@ -43,6 +47,20 @@ class Game extends Command
                 return 1;
             }
         }
+
+        $playerChoice = GameOption::tryFrom($playerChoice);
+
+        $randomChoice = Arr::random(GameOption::values());
+
+        $cpuChoice = GameOption::tryFrom($randomChoice);
+
+        $determineAction = new DecideOutcome();
+
+        $result = $determineAction->handle($playerChoice, $cpuChoice);
+
+        $this->info($playerChoice->value . ' vs ' . $cpuChoice->value);
+
+        $this->info($result->message . ': ' . $result->result->value);
 
     }
 }
